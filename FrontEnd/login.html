@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/style.css" />
-    <script type="module" src="projets.js"></script>
+    <script type="module" src="login.js"></script>
   </head>
   <body>
     <header>
@@ -26,14 +26,18 @@
       </nav>
     </header>
     <main>
-      <div class="LogIn">
+      <div id="formLogin">
         <h2>Log In</h2>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="emailLogin" />
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" />
-        <input type="submit" value="Se connecter" />
-        <p>Mot de passe oublié</p>
+        <form action="#" method="post">
+          <label for="emailLogin">E-mail</label>
+          <input type="email" name="email" id="emailLogin" required />
+          <small id="errorEmail" class="errorMessage"></small>
+          <label for="password">Mot de passe</label>
+          <input type="password" name="password" id="password" required />
+          <small id="errorPassword" class="errorMessage"></small>
+          <input type="submit" value="Se connecter" />
+        </form>
+        <p><span>Mot de passe oublié</span></p>
       </div>
     </main>
     <footer>
