@@ -50,3 +50,23 @@ for (let i = 0; i < categories.length; i++) {
     afficherProjets(projetsFiltres);
   });
 }
+// Modification du bouton login lorsqu'un token est présent //
+const btnLogout = document.getElementById("btnLogout");
+const token = window.localStorage.getItem("token");
+if (token) {
+  btnLogout.innerText = "logout";
+  projetsCategories.innerHTML = "";
+}
+// Retrait du token lorsque logout est cliqué //
+btnLogout.addEventListener("click", function () {
+  window.localStorage.removeItem("token");
+  window.location.href = "index.html";
+});
+
+const btnCloseModal = document.getElementById("croix");
+
+document
+  .getElementById("modifierPhotos")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+  });

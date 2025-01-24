@@ -13,6 +13,10 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script type="module" src="projets.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a4f1fd9c73.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
@@ -21,7 +25,7 @@
         <ul>
           <li>projets</li>
           <li>contact</li>
-          <li><a href="./login.html">login</a></li>
+          <li id="btnLogout"><a href="./login.html">login</a></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -51,8 +55,55 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="titreProjets">
+          <h2>Mes Projets</h2>
+          <a href="#modal" id="modifierPhotos">
+            <i class="fa-regular fa-pen-to-square"> </i>
+            <span>Modifier</span></a
+          >
+        </div>
         <div class="projetsCategories"></div>
+        <div
+          id="modal"
+          class="modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-model="false"
+          aria-labelledby="titreModale"
+          style="display: none"
+        >
+          <div class="modal-wrapper">
+            <i id="croix" role="button" class="fa-solid fa-xmark"></i>
+            <h3 id="titreModale">Galerie photo</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              tempus sem et mollis tincidunt. Curabitur varius leo neque, vel
+              gravida leo pulvinar et. Donec cursus metus non ornare feugiat.
+              Nullam fringilla massa sed dolor malesuada gravida. Etiam
+              consectetur nec felis ac consequat. Ut elit eros, dignissim vel
+              tortor nec, efficitur imperdiet felis. Donec sit amet odio nibh.
+              Sed ullamcorper maximus mauris, id imperdiet nulla porta sit amet.
+              Praesent rutrum rutrum vulputate. Vivamus ornare quam sed lobortis
+              posuere. Nam ornare a lectus ut lobortis. Aliquam dignissim nibh
+              id dapibus vestibulum. Mauris congue consequat massa, a ultricies
+              ipsum. Fusce ante orci, ornare id tempus id, cursus nec ipsum.
+              Etiam ultrices condimentum porta. Nam pretium arcu at neque
+              faucibus luctus. In condimentum, dui at efficitur ornare, quam dui
+              faucibus metus, sit amet vehicula turpis mi et nisi. Nulla neque
+              massa, scelerisque ut purus eget, tempus volutpat eros. In hac
+              habitasse platea dictumst. Vestibulum fermentum nunc vitae ex
+              iaculis molestie. Pellentesque sagittis, arcu eget accumsan
+              semper, felis nunc tempus risus, ac vulputate nunc nisi quis dui.
+              Etiam eu tempus nisi, ac placerat ante. In nec lacinia quam.
+            </p>
+
+            <div id="divPhotosModale"></div>
+            <div id="footerModale">
+              <input id="btnPhoto" type="submit" value="Ajouter une photo" />
+            </div>
+          </div>
+        </div>
+
         <div class="gallery">
           <figure>
             <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina" />
