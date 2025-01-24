@@ -306,39 +306,33 @@ li:hover {
 .gallery img {
   width: 100%;
 }
-#contact,
-#formLogin {
+.formulaire {
   width: 50%;
   margin: auto;
 }
-#contact,
-#formLogin > * {
+.formulaire > * {
   text-align: center;
 }
-#contact,
-#formLogin h2 {
+.formulaire h2 {
   margin-bottom: 20px;
 }
-#contact,
-#formLogin form {
+.formulaire form {
   text-align: left;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
-#contact,
-#formLogin input {
+.formulaire input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact,
-#formLogin label {
+.formulaire label {
   margin: 2em 0 1em 0;
 }
-#contact textarea {
+.formulaire textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -356,7 +350,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #0e2f28;
 }
-#contact p span {
+.formulaire p span {
   text-decoration: underline;
   cursor: pointer;
 }
