@@ -266,6 +266,11 @@ li:hover {
   justify-content: end;
   cursor: pointer;
 }
+#footerModale {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 
 /* Fin modale */
 

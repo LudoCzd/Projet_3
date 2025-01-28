@@ -63,12 +63,20 @@ btnLogout.addEventListener("click", function () {
   window.location.href = "index.html";
 });
 const modal = document.getElementById("modal");
+const modalWrapper = document.querySelector(".modal-wrapper");
+
+const stopPropagation = function (event) {
+  event.stopPropagation();
+};
+
 // Fonction ouverture Modale //
 const openModale = function (event) {
   event.preventDefault();
   modal.removeAttribute("style");
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
+  modal.addEventListener("click", closeModal);
+  modalWrapper.addEventListener("click", stopPropagation);
 };
 //Fermeture modale //
 const closeModal = function (event) {
@@ -77,6 +85,8 @@ const closeModal = function (event) {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-modal", "false");
+  modal.removeEventListener("click", closeModal);
+  modalWrapper.removeEventListener("click", stopPropagation);
 };
 // Récupération des boutons //
 const modifierPhotos = document
