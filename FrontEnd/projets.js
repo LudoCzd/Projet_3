@@ -63,10 +63,24 @@ btnLogout.addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
+// Fonction ouverture Modale //
+const openModale = function (event) {
+  event.preventDefault();
+  const modal = document.getElementById("modal");
+  modal.removeAttribute("style");
+  modal.removeAttribute("aria-hidden");
+  modal.setAttribute("aria-modal", "true");
+};
+
+document.getElementById("modifierPhotos").addEventListener("click", openModale);
+
 const btnCloseModal = document.getElementById("croix");
 
-document
-  .getElementById("modifierPhotos")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-  });
+//Fermeture modale //
+
+btnCloseModal.addEventListener("click", function () {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  modal.setAttribute("aria-modal", "false");
+});
