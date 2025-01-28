@@ -62,25 +62,34 @@ btnLogout.addEventListener("click", function () {
   window.localStorage.removeItem("token");
   window.location.href = "index.html";
 });
-
+const modal = document.getElementById("modal");
 // Fonction ouverture Modale //
 const openModale = function (event) {
   event.preventDefault();
-  const modal = document.getElementById("modal");
   modal.removeAttribute("style");
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
 };
-
-document.getElementById("modifierPhotos").addEventListener("click", openModale);
-
-const btnCloseModal = document.getElementById("croix");
-
 //Fermeture modale //
-
-btnCloseModal.addEventListener("click", function () {
-  const modal = document.getElementById("modal");
+const closeModal = function (event) {
+  if (modal === null) return;
+  event.preventDefault();
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-modal", "false");
+};
+// Récupération des boutons //
+const modifierPhotos = document
+  .getElementById("modifierPhotos")
+  .addEventListener("click", openModale);
+const btnCloseModal = document
+  .getElementById("croix")
+  .addEventListener("click", closeModal);
+
+// Fermeture modale avec échap //
+
+window.addEventListener("keydown", function (event) {
+  if (event.key === "Escape" || event.key === "Esc") {
+    closeModal(event);
+  }
 });
