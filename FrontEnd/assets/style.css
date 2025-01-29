@@ -266,6 +266,13 @@ li:hover {
   justify-content: end;
   cursor: pointer;
 }
+.iconeEnTete {
+  display: flex;
+  justify-content: space-between;
+}
+.iconeEnTete i {
+  cursor: pointer;
+}
 #footerModale {
   display: flex;
   justify-content: center;

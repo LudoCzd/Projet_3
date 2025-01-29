@@ -63,43 +63,73 @@ btnLogout.addEventListener("click", function () {
   window.location.href = "index.html";
 });
 const modal = document.getElementById("modal");
-const modalWrapper = document.querySelector(".modal-wrapper");
 
 const stopPropagation = function (event) {
   event.stopPropagation();
 };
 
 // Fonction ouverture Modale //
-const openModale = function (event) {
+const openModale = function (modalToOpen, event) {
   event.preventDefault();
-  modal.removeAttribute("style");
-  modal.removeAttribute("aria-hidden");
-  modal.setAttribute("aria-modal", "true");
-  modal.addEventListener("click", closeModal);
+  modalToOpen.removeAttribute("style");
+  modalToOpen.removeAttribute("aria-hidden");
+  modalToOpen.setAttribute("aria-modal", "true");
+
+  modalToOpen.addEventListener("click", function (event) {
+    if (event.target === modalToOpen) {
+      closeModal(modalToOpen, event);
+    }
+  });
+
+  const modalWrapper = modalToOpen.querySelector(".modal-wrapper");
   modalWrapper.addEventListener("click", stopPropagation);
+
+  modalToOpen.addEventListener("click", closeModal);
 };
+
 //Fermeture modale //
-const closeModal = function (event) {
-  if (modal === null) return;
+const closeModal = function (modalToClose, event) {
+  if (modalToClose === null) return;
   event.preventDefault();
-  modal.style.display = "none";
-  modal.setAttribute("aria-hidden", "true");
-  modal.setAttribute("aria-modal", "false");
-  modal.removeEventListener("click", closeModal);
+  modalToClose.style.display = "none";
+  modalToClose.setAttribute("aria-hidden", "true");
+  modalToClose.setAttribute("aria-modal", "false");
+
+  const modalWrapper = modalToClose.querySelector(".modal-wrapper");
   modalWrapper.removeEventListener("click", stopPropagation);
+  modalToClose.removeEventListener("click", closeModal);
 };
+
 // Récupération des boutons //
 const modifierPhotos = document
   .getElementById("modifierPhotos")
-  .addEventListener("click", openModale);
+  .addEventListener("click", function (event) {
+    openModale(modal, event);
+  });
 const btnCloseModal = document
   .getElementById("croix")
-  .addEventListener("click", closeModal);
+  .addEventListener("click", function (event) {
+    closeModal(modal, event);
+  });
 
 // Fermeture modale avec échap //
 
 window.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
-    closeModal(event);
+    closeModal(modal, event);
+    closeModal(modalAjoutPhoto, event);
   }
 });
+
+const btnPhoto = document.getElementById("btnPhoto");
+const modalAjoutPhoto = document.getElementById("modalAjoutPhoto");
+
+btnPhoto.addEventListener("click", function (event) {
+  closeModal(modal, event);
+  openModale(modalAjoutPhoto, event);
+});
+const btnCloseModalAjout = document
+  .getElementById("croixAjoutPhoto")
+  .addEventListener("click", function (event) {
+    closeModal(modalAjoutPhoto, event);
+  });
