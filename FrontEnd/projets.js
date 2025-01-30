@@ -124,12 +124,23 @@ window.addEventListener("keydown", function (event) {
 const btnPhoto = document.getElementById("btnPhoto");
 const modalAjoutPhoto = document.getElementById("modalAjoutPhoto");
 
+//Changement de modale //
+
 btnPhoto.addEventListener("click", function (event) {
   closeModal(modal, event);
   openModale(modalAjoutPhoto, event);
 });
+
 const btnCloseModalAjout = document
   .getElementById("croixAjoutPhoto")
   .addEventListener("click", function (event) {
     closeModal(modalAjoutPhoto, event);
   });
+
+const btnRetour = document.getElementById("btnRetour");
+
+btnRetour.addEventListener("click", function (event) {
+  event.preventDefault();
+  closeModal(modalAjoutPhoto, event);
+  openModale(modal, event);
+});
