@@ -77,35 +77,12 @@
               id="croix"
               role="button"
               class="fa-solid fa-xmark"
-              aria-label="Fermer la modale"
-              title="Fermer la modale"
+              aria-label="Fermer"
+              title="Fermer"
             ></i>
             <h3 id="titreModale">Galerie photo</h3>
 
-            <div id="divPhotosModale">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                tempus sem et mollis tincidunt. Curabitur varius leo neque, vel
-                gravida leo pulvinar et. Donec cursus metus non ornare feugiat.
-                Nullam fringilla massa sed dolor malesuada gravida. Etiam
-                consectetur nec felis ac consequat. Ut elit eros, dignissim vel
-                tortor nec, efficitur imperdiet felis. Donec sit amet odio nibh.
-                Sed ullamcorper maximus mauris, id imperdiet nulla porta sit
-                amet. Praesent rutrum rutrum vulputate. Vivamus ornare quam sed
-                lobortis posuere. Nam ornare a lectus ut lobortis. Aliquam
-                dignissim nibh id dapibus vestibulum. Mauris congue consequat
-                massa, a ultricies ipsum. Fusce ante orci, ornare id tempus id,
-                cursus nec ipsum. Etiam ultrices condimentum porta. Nam pretium
-                arcu at neque faucibus luctus. In condimentum, dui at efficitur
-                ornare, quam dui faucibus metus, sit amet vehicula turpis mi et
-                nisi. Nulla neque massa, scelerisque ut purus eget, tempus
-                volutpat eros. In hac habitasse platea dictumst. Vestibulum
-                fermentum nunc vitae ex iaculis molestie. Pellentesque sagittis,
-                arcu eget accumsan semper, felis nunc tempus risus, ac vulputate
-                nunc nisi quis dui. Etiam eu tempus nisi, ac placerat ante. In
-                nec lacinia quam.
-              </p>
-            </div>
+            <div id="divPhotosModale"></div>
             <div id="footerModale">
               <input id="btnPhoto" type="submit" value="Ajouter une photo" />
             </div>
@@ -134,14 +111,30 @@
                 id="croixAjoutPhoto"
                 role="button"
                 class="fa-solid fa-xmark"
-                aria-label="Fermer la modale"
-                title="Fermer la modale"
+                aria-label="Fermer"
+                title="Fermer"
               ></i>
             </div>
             <h3 id="titreAjoutPhoto">Ajout photo</h3>
-            <div id="inputAjoutPhoto"></div>
-            <div id="footerModale">
-              <input id="btnValiderPhoto" type="submit" value="Valider" />
+            <div id="inputAjoutModale">
+              <form action="#" method="POST">
+                <input
+                  type="file"
+                  id="inputAjoutFichier"
+                  name="inputAjoutFichier"
+                  accept=".jpg, .png"
+                  required
+                />
+                <label for="titreAjout">Titre</label>
+                <input type="text" name="titreAjout" id="titreAjout" required />
+                <label for="categorieAjout">Catégorie</label>
+                <select name="categorieAjout" id="categorieAjout" required>
+                  <option value=""></option>
+                </select>
+                <div id="footerModale">
+                  <input id="btnValiderPhoto" type="submit" value="Valider" />
+                </div>
+              </form>
             </div>
           </div>
         </div>

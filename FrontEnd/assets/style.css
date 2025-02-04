@@ -246,6 +246,8 @@ li:hover {
   justify-content: center;
 }
 .modal-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 630px;
   height: 688px;
   align-items: center;
@@ -278,7 +280,30 @@ li:hover {
   justify-content: center;
   align-items: flex-end;
 }
+#divPhotosModale {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 50px;
+  border-bottom: solid 2px;
+}
+#divPhotosModale img {
+  width: 6em;
+  margin-top: 25px;
+}
+.iconeSuppr {
+  background-color: black;
+  color: white;
+  position: relative;
+  font-size: 17px;
+  padding: 6px;
+}
 
+.disabled {
+  cursor: not-allowed;
+  background-color: #a7a7a7 !important;
+}
 /* Fin modale */
 
 .projetsCategories {
