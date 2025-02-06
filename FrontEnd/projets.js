@@ -214,6 +214,25 @@ function verifierForm() {
 
 verifierForm();
 
+// Fonction d'ajout de la photo dans la modale sans actualiser //
+function ajoutPhotoModale(projet) {
+  const figureModale = document.createElement("figure");
+  const photoModale = document.createElement("img");
+  const imageElement = projet.imageUrl;
+  photoModale.appendChild(imageElement);
+  const iconeSuppression = document.createElement("i");
+  iconeSuppression.classList.add("fa-solid", "fa-trash-can", "iconeSuppr");
+  figureModale.appendChild(photoModale);
+  figureModale.appendChild(iconeSuppression);
+}
+//Fonction d'ajoout de la photo dans la gallerie sans actualiser //
+function ajoutPhotoGallery(projet) {
+  const figure = document.createElement("figure");
+  const photoGallery = document.createElement("img");
+  image;
+
+  const titre = document.createElement("figcaption");
+}
 // Ajout d'un fichier depuis la modale //
 formAjout.addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -239,6 +258,8 @@ formAjout.addEventListener("submit", async function (event) {
       throw new Error(`Erreur HTTP : ${response.status} `);
     }
     const data = await response.json();
+
+    formAjout.reset();
     console.log("Ajout effectué:", data);
   } catch (error) {
     console.error("Erreur lors de l'ajout", error);
