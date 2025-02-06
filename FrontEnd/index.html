@@ -57,7 +57,14 @@
       <section id="portfolio">
         <div class="titreProjets">
           <h2>Mes Projets</h2>
-          <a href="#modal" id="modifierPhotos" role="button">
+          <a
+            href="#modal"
+            id="modifierPhotos"
+            role="button"
+            aria-hidden="true"
+            style="display: none"
+            ;
+          >
             <i class="fa-regular fa-pen-to-square"> </i>
             <span>Modifier</span></a
           >
@@ -80,11 +87,13 @@
               aria-label="Fermer"
               title="Fermer"
             ></i>
-            <h3 id="titreModale">Galerie photo</h3>
+            <div class="modalContent">
+              <h3 id="titreModale">Galerie photo</h3>
 
-            <div id="divPhotosModale"></div>
-            <div id="footerModale">
-              <input id="btnPhoto" type="submit" value="Ajouter une photo" />
+              <div id="divPhotosModale"></div>
+              <div id="footerModale" class="formulaire">
+                <input id="btnPhoto" type="submit" value="Ajouter une photo" />
+              </div>
             </div>
           </div>
         </div>
@@ -115,26 +124,33 @@
                 title="Fermer"
               ></i>
             </div>
-            <h3 id="titreAjoutPhoto">Ajout photo</h3>
-            <div id="inputAjoutModale">
-              <form action="#" method="POST">
-                <input
-                  type="file"
-                  id="inputAjoutFichier"
-                  name="inputAjoutFichier"
-                  accept=".jpg, .png"
-                  required
-                />
-                <label for="titreAjout">Titre</label>
-                <input type="text" name="titreAjout" id="titreAjout" required />
-                <label for="categorieAjout">Catégorie</label>
-                <select name="categorieAjout" id="categorieAjout" required>
-                  <option value=""></option>
-                </select>
-                <div id="footerModale">
-                  <input id="btnValiderPhoto" type="submit" value="Valider" />
-                </div>
-              </form>
+            <div class="modalContentAjout">
+              <h3 id="titreAjoutPhoto">Ajout photo</h3>
+              <div id="inputAjoutModale" class="formulaire">
+                <form action="#" method="POST">
+                  <input
+                    type="file"
+                    id="inputAjoutFichier"
+                    name="inputAjoutFichier"
+                    accept=".jpg, .png"
+                    required
+                  />
+                  <label for="titreAjout">Titre</label>
+                  <input
+                    type="text"
+                    name="titreAjout"
+                    id="titreAjout"
+                    required
+                  />
+                  <label for="categorieAjout">Catégorie</label>
+                  <select name="categorieAjout" id="categorieAjout" required>
+                    <option value=""></option>
+                  </select>
+                  <div id="footerModale">
+                    <input id="btnValiderPhoto" type="submit" value="Valider" />
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

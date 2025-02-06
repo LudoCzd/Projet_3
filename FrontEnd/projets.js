@@ -1,4 +1,4 @@
-const travaux = await fetch("http://localhost:5678/api/works").then((travaux) =>
+let travaux = await fetch("http://localhost:5678/api/works").then((travaux) =>
   travaux.json()
 );
 const categories = await fetch("http://localhost:5678/api/categories").then(
@@ -67,6 +67,13 @@ const modal = document.getElementById("modal");
 const stopPropagation = function (event) {
   event.stopPropagation();
 };
+
+//Apparatition du bouton de modification //
+const btnModifier = document.getElementById("modifierPhotos");
+if (token) {
+  btnModifier.removeAttribute("style");
+  btnModifier.removeAttribute("aria-hidden");
+}
 
 // Fonction ouverture Modale //
 const openModale = function (modalToOpen, event) {
@@ -214,24 +221,52 @@ function verifierForm() {
 
 verifierForm();
 
-// Fonction d'ajout de la photo dans la modale sans actualiser //
+//Ajout de la photo dans la gallery sans actualiser la page //
+
+function ajoutPhotoGallery(projet) {
+  const gallery = document.querySelector(".gallery");
+  const figure = document.createElement("figure");
+  const imageElement = document.createElement("img");
+  imageElement.src = projet.imageUrl;
+  imageElement.alt = projet.title;
+  const titreElement = document.createElement("figcaption");
+  titreElement.textContent = projet.title;
+  figure.appendChild(imageElement);
+  figure.appendChild(titreElement);
+  gallery.appendChild(figure);
+}
+
+// Ajout de la photo et suppression dans la modale sans actualiser la page //
+
 function ajoutPhotoModale(projet) {
-  const figureModale = document.createElement("figure");
-  const photoModale = document.createElement("img");
-  const imageElement = projet.imageUrl;
-  photoModale.appendChild(imageElement);
+  const modale = document.getElementById("divPhotosModale");
+  const figure = document.createElement("figure");
+  const imageElement = document.createElement("img");
+  imageElement.src = projet.imageUrl;
   const iconeSuppression = document.createElement("i");
   iconeSuppression.classList.add("fa-solid", "fa-trash-can", "iconeSuppr");
-  figureModale.appendChild(photoModale);
-  figureModale.appendChild(iconeSuppression);
-}
-//Fonction d'ajoout de la photo dans la gallerie sans actualiser //
-function ajoutPhotoGallery(projet) {
-  const figure = document.createElement("figure");
-  const photoGallery = document.createElement("img");
-  image;
-
-  const titre = document.createElement("figcaption");
+  iconeSuppression.addEventListener("click", async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5678/api/works/${projet.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        imageElement.remove();
+        iconeSuppression.remove();
+      }
+    } catch (error) {
+      console.error("Erreur réseau", error);
+    }
+  });
+  figure.appendChild(imageElement);
+  figure.appendChild(iconeSuppression);
+  modale.appendChild(figure);
 }
 // Ajout d'un fichier depuis la modale //
 formAjout.addEventListener("submit", async function (event) {
@@ -258,7 +293,8 @@ formAjout.addEventListener("submit", async function (event) {
       throw new Error(`Erreur HTTP : ${response.status} `);
     }
     const data = await response.json();
-
+    ajoutPhotoGallery(data);
+    ajoutPhotoModale(data);
     formAjout.reset();
     console.log("Ajout effectué:", data);
   } catch (error) {
