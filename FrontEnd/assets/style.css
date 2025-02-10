@@ -270,6 +270,9 @@ li:hover {
   margin-bottom: 30px;
   margin-top: 15px;
 }
+.modal-wrapper input[type="submit"] {
+  width: 40em;
+}
 #croix {
   display: flex;
   justify-content: end;
@@ -286,15 +289,57 @@ li:hover {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border-top: solid 1px #b3b3b3;
   padding-top: 25px;
+  border-top: solid 1px #b3b3b3;
+  width: 80%;
+}
+#footerModale input[type="submit"] {
+  width: 237px;
+  font-size: 14px;
+  height: 36px;
 }
 .modalContentAjout h3 {
   margin-top: 15px;
   margin-bottom: 50px;
 }
+.divFichierPreview {
+  height: 12em;
+  width: 100%;
+  background-color: #e8f1f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3px;
+}
+.divFichierPreview i {
+  display: flex;
+  justify-content: center;
+  font-size: 5em;
+  padding-top: 20px;
+}
+#btnAjouterPhoto {
+  cursor: pointer;
+  width: 40%;
+  display: flex;
+  border: none;
+  justify-content: center;
+  color: #306685;
+  font-size: 14px;
+  background-color: #cbd6dc;
+  padding: 10px;
+  border-radius: 50px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.divFichierPreview small {
+  font-size: 10px;
+}
+
 #inputAjoutModale #footerModale {
   margin-top: 50px;
+}
+#inputAjoutModale {
+  width: 70%;
 }
 #divPhotosModale {
   width: 80%;
@@ -379,7 +424,6 @@ li:hover {
   display: flex;
   flex-direction: column;
 }
-
 .formulaire input,
 select {
   height: 50px;
@@ -409,6 +453,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #0e2f28;
 }
+
 .formulaire p span {
   text-decoration: underline;
   cursor: pointer;

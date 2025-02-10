@@ -301,3 +301,9 @@ formAjout.addEventListener("submit", async function (event) {
     console.error("Erreur lors de l'ajout", error);
   }
 });
+
+const btnAjouterPhoto = document.getElementById("btnAjouterPhoto");
+const inputAjoutFichier = document.getElementById("inputAjoutFichier");
+btnAjouterPhoto.addEventListener("click", function () {
+  inputAjoutFichier.click();
+});

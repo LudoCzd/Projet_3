@@ -128,13 +128,20 @@
               <h3 id="titreAjoutPhoto">Ajout photo</h3>
               <div id="inputAjoutModale" class="formulaire">
                 <form action="#" method="POST">
-                  <input
-                    type="file"
-                    id="inputAjoutFichier"
-                    name="inputAjoutFichier"
-                    accept=".jpg, .png"
-                    required
-                  />
+                  <div class="divFichierPreview" id="divAjout">
+                    <i class="fa-regular fa-image" style="color: #b9c5cc"></i>
+                    <button id="btnAjouterPhoto">+ Ajouter photo</button>
+                    <small>jpg, png : 4mo max</small>
+                    <input
+                      type="file"
+                      id="inputAjoutFichier"
+                      name="inputAjoutFichier"
+                      aria-hidden="true"
+                      style="opacity: 0; position: absolute; left: -9999px"
+                      accept=".jpg, .png"
+                      required
+                    />
+                  </div>
                   <label for="titreAjout">Titre</label>
                   <input
                     type="text"
@@ -146,6 +153,7 @@
                   <select name="categorieAjout" id="categorieAjout" required>
                     <option value=""></option>
                   </select>
+
                   <div id="footerModale">
                     <input id="btnValiderPhoto" type="submit" value="Valider" />
                   </div>
