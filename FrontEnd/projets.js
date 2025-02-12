@@ -271,7 +271,6 @@ function ajoutPhotoModale(projet) {
 // Ajout d'un fichier depuis la modale //
 formAjout.addEventListener("submit", async function (event) {
   event.preventDefault();
-
   const image = inputFichier.files[0];
   const titre = inputTitre.value;
   const categorie = selectCategorie.value;
@@ -296,14 +295,45 @@ formAjout.addEventListener("submit", async function (event) {
     ajoutPhotoGallery(data);
     ajoutPhotoModale(data);
     formAjout.reset();
+    closeModal(modalAjoutPhoto, event);
     console.log("Ajout effectué:", data);
   } catch (error) {
     console.error("Erreur lors de l'ajout", error);
   }
 });
 
+// Lien du bouton ajouter photo --> input file //
 const btnAjouterPhoto = document.getElementById("btnAjouterPhoto");
 const inputAjoutFichier = document.getElementById("inputAjoutFichier");
 btnAjouterPhoto.addEventListener("click", function () {
   inputAjoutFichier.click();
+});
+
+// Affichage de l'image sélectionnée //
+const inputImage = document.getElementById("divAjout");
+const imagePreview = document.getElementById("imagePreview");
+const btnSuppressionUpload = document.getElementById("btnSuppressionUpload");
+inputAjoutFichier.addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const fileReader = new FileReader();
+    fileReader.onload = function (event) {
+      imagePreview.src = event.target.result;
+      imagePreview.style = "display:block";
+      inputImage.classList.add("fichierUpload");
+    };
+    fileReader.readAsDataURL(file);
+  } else {
+    alert("Erreur lors de l'affichage de l'image");
+    inputAjoutFichier.value = "";
+  }
+
+  btnRetour.addEventListener("click", function () {
+    imagePreview.src = "";
+    imagePreview.style.display = "none";
+    inputAjoutFichier.value = "";
+    inputImage.classList.remove("fichierUpload");
+    titreAjout.value = "";
+    categorieSelect.value = "";
+  });
 });

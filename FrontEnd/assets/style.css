@@ -248,6 +248,7 @@ li:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: modalAnim 0.3s both;
 }
 .modal-wrapper {
   width: 32%;
@@ -270,6 +271,7 @@ li:hover {
   margin-bottom: 30px;
   margin-top: 15px;
 }
+
 .modal-wrapper input[type="submit"] {
   width: 40em;
 }
@@ -293,6 +295,21 @@ li:hover {
   border-top: solid 1px #b3b3b3;
   width: 80%;
 }
+
+#inputAjoutModale #footerModale {
+  width: 100%;
+}
+/* #inputAjoutModale select {
+} */
+
+@keyframes modalAnim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 #footerModale input[type="submit"] {
   width: 237px;
   font-size: 14px;
@@ -303,6 +320,7 @@ li:hover {
   margin-bottom: 50px;
 }
 .divFichierPreview {
+  position: relative;
   height: 12em;
   width: 100%;
   background-color: #e8f1f6;
@@ -317,6 +335,21 @@ li:hover {
   font-size: 5em;
   padding-top: 20px;
 }
+.fichierUpload i,
+.fichierUpload button,
+.fichierUpload small {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fichierUpload img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
 #btnAjouterPhoto {
   cursor: pointer;
   width: 40%;
