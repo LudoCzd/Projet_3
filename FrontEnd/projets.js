@@ -12,6 +12,7 @@ function afficherProjets(projets) {
   gallery.innerHTML = "";
   for (let i = 0; i < projets.length; i++) {
     const figure = document.createElement("figure");
+    figure.setAttribute("data-id", projets[i].id);
     const imageElement = document.createElement("img");
     imageElement.src = projets[i].imageUrl;
     const titreElement = document.createElement("figcaption");
@@ -35,6 +36,7 @@ projetsCategories.appendChild(boutonTous);
 boutonTous.addEventListener("click", function () {
   afficherProjets(travaux);
 });
+
 // Boucle for pour assigner les nom de catégories aux boutons //
 
 for (let i = 0; i < categories.length; i++) {
@@ -153,35 +155,57 @@ btnRetour.addEventListener("click", function (event) {
   closeModal(modalAjoutPhoto, event);
   openModale(modal, event);
 });
-// Insertion et suppression des images dans la première modale//
+
+//Suppression des photos //
+
+async function supprimerPhoto(projetId) {
+  try {
+    const response = await fetch(
+      `http://localhost:5678/api/works/${projetId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const figureModale = document.querySelector(
+        `#divPhotosModale figure[data-id="${projetId}"]`
+      );
+      if (figureModale) {
+        figureModale.remove();
+      }
+      const figureGallery = document.querySelector(
+        `.gallery figure[data-id="${projetId}"]`
+      );
+      console.log("Element trouvé");
+      if (figureGallery) {
+        console.log("Suppression");
+        figureGallery.remove();
+        console.log("Element supprimé");
+      }
+    }
+  } catch (error) {
+    console.error("Erreur réseau", error);
+  }
+}
+
+// Insertion des images dans la première modale//
 const divPhotosModale = document.getElementById("divPhotosModale");
 
 for (const projet of travaux) {
   const figureModale = document.createElement("figure");
+  figureModale.setAttribute("data-id", projet.id);
   const photoModale = document.createElement("img");
   photoModale.src = projet.imageUrl;
   const iconeSuppression = document.createElement("i");
   iconeSuppression.classList.add("fa-solid", "fa-trash-can", "iconeSuppr");
-  iconeSuppression.addEventListener("click", async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:5678/api/works/${projet.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        photoModale.remove();
-        iconeSuppression.remove();
-      }
-    } catch (error) {
-      console.error("Erreur réseau", error);
-    }
+  iconeSuppression.addEventListener("click", () => {
+    supprimerPhoto(projet.id);
+    afficherProjets(travaux);
   });
-
   figureModale.appendChild(photoModale);
   figureModale.appendChild(iconeSuppression);
   divPhotosModale.appendChild(figureModale);
