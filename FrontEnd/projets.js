@@ -284,7 +284,24 @@ function ajoutPhotoModale(projet) {
   const iconeSuppression = document.createElement("i");
   iconeSuppression.classList.add("fa-solid", "fa-trash-can", "iconeSuppr");
   iconeSuppression.addEventListener("click", async () => {
-    await supprimerPhoto(projet.id);
+    try {
+      const response = await fetch(
+        `http://localhost:5678/api/works/${projet.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        imageElement.remove();
+        iconeSuppression.remove();
+        afficherProjets(travaux);
+      }
+    } catch (error) {
+      console.error("Erreur réseau", error);
+    }
   });
   figure.appendChild(imageElement);
   figure.appendChild(iconeSuppression);
