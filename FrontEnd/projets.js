@@ -76,6 +76,15 @@ if (token) {
   btnModifier.removeAttribute("style");
   btnModifier.removeAttribute("aria-hidden");
 }
+// Permet de vider l'input de l'ajout photo//
+function viderInput() {
+  imagePreview.src = "";
+  imagePreview.style.display = "none";
+  inputAjoutFichier.value = "";
+  inputImage.classList.remove("fichierUpload");
+  titreAjout.value = "";
+  categorieSelect.value = "";
+}
 
 // Fonction ouverture Modale //
 const openModale = function (modalToOpen, event) {
@@ -107,6 +116,7 @@ const closeModal = function (modalToClose, event) {
   const modalWrapper = modalToClose.querySelector(".modal-wrapper");
   modalWrapper.removeEventListener("click", stopPropagation);
   modalToClose.removeEventListener("click", closeModal);
+  viderInput();
 };
 
 // Récupération des boutons //
@@ -170,22 +180,26 @@ async function supprimerPhoto(projetId) {
       }
     );
 
-    if (response.ok) {
-      const figureModale = document.querySelector(
-        `#divPhotosModale figure[data-id="${projetId}"]`
-      );
-      if (figureModale) {
-        figureModale.remove();
-      }
-      const figureGallery = document.querySelector(
-        `.gallery figure[data-id="${projetId}"]`
-      );
-      console.log("Element trouvé");
-      if (figureGallery) {
-        console.log("Suppression");
-        figureGallery.remove();
-        console.log("Element supprimé");
-      }
+    if (!response.ok) {
+      throw new Error(`Erreur : ${response.status}`);
+    }
+
+    const data = await response.json;
+    console.log(data);
+
+    const figureModale = document.querySelector(
+      `#divPhotosModale figure[data-id="${projetId}"]`
+    );
+
+    if (figureModale) {
+      figureModale.remove();
+    }
+    const figureGallery = document.querySelector(
+      `.gallery figure[data-id="${projetId}"]`
+    );
+
+    if (figureGallery) {
+      figureGallery.remove();
     }
   } catch (error) {
     console.error("Erreur réseau", error);
@@ -270,23 +284,7 @@ function ajoutPhotoModale(projet) {
   const iconeSuppression = document.createElement("i");
   iconeSuppression.classList.add("fa-solid", "fa-trash-can", "iconeSuppr");
   iconeSuppression.addEventListener("click", async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:5678/api/works/${projet.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        imageElement.remove();
-        iconeSuppression.remove();
-      }
-    } catch (error) {
-      console.error("Erreur réseau", error);
-    }
+    await supprimerPhoto(projet.id);
   });
   figure.appendChild(imageElement);
   figure.appendChild(iconeSuppression);
@@ -351,13 +349,4 @@ inputAjoutFichier.addEventListener("change", function (event) {
     alert("Erreur lors de l'affichage de l'image");
     inputAjoutFichier.value = "";
   }
-
-  btnRetour.addEventListener("click", function () {
-    imagePreview.src = "";
-    imagePreview.style.display = "none";
-    inputAjoutFichier.value = "";
-    inputImage.classList.remove("fichierUpload");
-    titreAjout.value = "";
-    categorieSelect.value = "";
-  });
 });
